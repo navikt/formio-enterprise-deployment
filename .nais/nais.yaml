@@ -12,14 +12,15 @@ spec:
     min: 2
     max: 2
     cpuThresholdPercentage: 50
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
   prometheus:
     enabled: false
-  limits:
-    cpu: "200m"
-    memory: "256Mi"
-  requests:
-    cpu: "200m"
-    memory: "256Mi"
   ingresses:
     {{#each ingresses as |url|}}
     - {{url}}
