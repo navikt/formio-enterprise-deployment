@@ -2,7 +2,7 @@ name: Deploy Formio enterprise server
 on:
   push
 env:
-  IMAGE: "formio/formio-enterprise:7.3.2"
+  IMAGE: "ghcr.io/navikt/formio-enterprise-deployment/formio-enterprise:7.3.2"
 
 concurrency: deploy-${{ github.ref }}
 
