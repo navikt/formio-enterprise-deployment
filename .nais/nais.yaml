@@ -1,0 +1,37 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: formio-enterprise-server
+  namespace: skjemadigitalisering
+  labels:
+    team: skjemadigitalisering
+spec:
+  image: {{image}}
+  port: 3000
+  replicas:
+    min: 2
+    max: 2
+    cpuThresholdPercentage: 50
+  prometheus:
+    enabled: false
+  limits:
+    cpu: "200m"
+    memory: "256Mi"
+  requests:
+    cpu: "200m"
+    memory: "256Mi"
+  ingresses:
+    {{#each ingresses as |url|}}
+    - {{url}}
+    {{/each}}
+  envFrom:
+    - secret: formio-enterprise-server
+  accessPolicy:
+    outbound:
+      external:
+        - host: cluster0.6r72k.mongodb.net
+        - host: cluster0.jvzlj.mongodb.net
+          ports:
+            - name: mongo
+              port: 27017
+              protocol: TCP

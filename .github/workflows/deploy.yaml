@@ -1,0 +1,24 @@
+name: Deploy Formio enterprise server
+on:
+  push
+env:
+  IMAGE: "formio/formio-enterprise:7.3.2"
+
+concurrency: deploy-${{ github.ref }}
+
+
+jobs: 
+
+  deploy-to-dev:
+    name: "Deploy Formio enterprise server to dev"
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: "actions/checkout@v2"
+      - name: "Deploy to dev-gcp"
+        env:
+          APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
+          CLUSTER: "dev-gcp"
+          RESOURCE: ".nais/nais.yaml"
+          VARS: ".nais/dev.yaml"
+        uses: "nais/deploy/actions/deploy@v1"
