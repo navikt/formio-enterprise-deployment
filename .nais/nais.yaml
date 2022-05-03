@@ -5,6 +5,9 @@ metadata:
   namespace: skjemadigitalisering
   labels:
     team: skjemadigitalisering
+  annotations:
+    nais.io/run-as-user: "5000"
+    nais.io/run-as-group: "5000"
 spec:
   image: {{image}}
   port: 3000
