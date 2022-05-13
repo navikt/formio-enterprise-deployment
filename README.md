@@ -1,9 +1,7 @@
 # formio-enterprise-deployment
-Deployment of the formio enterprise server to gcp
+Deployment of the formio enterprise server to gcp.
 
 ## Docker image
-There exists a list of [allowed registries](https://docs.nais.io/deployment/allowed-registries/) for NAIS, so we need to retag formio/formio-enterprise, e.g.:
-
-    docker pull formio/formio-enterprise:7.3.2
-    docker tag formio/formio-enterprise:7.3.2 ghcr.io/navikt/formio-enterprise-deployment/formio-enterprise:7.3.2
-    docker push ghcr.io/navikt/formio-enterprise-deployment/formio-enterprise:7.3.2
+The official formio/formio-enterprise image requires the NET_BIND_SERVICE capability to be available,
+but NAIS does not allow this, so we have a custom Dockerfile in this repository which is used to
+build our own docker image (see workflow `docker-build.yaml`).
