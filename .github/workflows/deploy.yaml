@@ -2,7 +2,7 @@ name: Deploy Formio enterprise server
 on:
   workflow_dispatch:
 env:
-  IMAGE: "ghcr.io/navikt/formio-enterprise-deployment/formio-enterprise-nav:7.3.2"
+  IMAGE: ghcr.io/${{ github.repository }}/formio-enterprise-nav:7.3.2
 
 concurrency: deploy-${{ github.ref }}
 
