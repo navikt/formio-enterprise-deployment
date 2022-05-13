@@ -2,7 +2,7 @@ name: Build docker image
 on:
   workflow_dispatch:
 env:
-  IMAGE: "ghcr.io/navikt/formio-enterprise-deployment/formio-enterprise-nav:7.3.2"
+  IMAGE: ghcr.io/${{ github.repository }}/formio-enterprise-nav:7.3.2
 
 
 jobs:
@@ -13,7 +13,9 @@ jobs:
     steps:
       - uses: "actions/checkout@v2"
       - name: "Build and push Docker image"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           docker build --tag ${IMAGE} .
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login -u ${{ github.repository }} --password-stdin https://docker.pkg.github.com
+          echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${{ github.repository }} --password-stdin
           docker push ${IMAGE}
