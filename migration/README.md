@@ -55,11 +55,12 @@ Klikk på secret `formio-enterprise-server`, og oppdater følgende til riktige v
 
     MONGO=mongodb+srv://cluster0.XXXXX.mongodb.net/navforms_prod?retryWrites=true&w=majority
     MONGO_CONFIG={"auth": {"username":"mongo-admin-brukernavn", "password": "mongo-admin-passord"}}
-    JWT_SECRET=settes-til-en-lang-vilkarlig-verdi-som-ogsa-ma-legges-inn-i-secret-bygger-dev-som-FORMIO_JWT_SECRET
+    ADMIN_PASS=<noe-annet-enn-changeme>
 
 ### 5.3 Deploy enterprise sever
 
-Kjør [deploy.yaml](https://github.com/navikt/formio-enterprise-deployment/actions/workflows/deploy.yaml) manuelt.
+Kjør workflow [deploy.yaml](https://github.com/navikt/formio-enterprise-deployment/actions/workflows/deploy.yaml)
+manuelt ved å trykke "Run workflow", sjekk at branch er `main` og trykk på knappen "Run workflow".
 
 ## 6. Opprett hovedprosjekt for nav-skjemaene
 
@@ -76,6 +77,10 @@ Refresh siden og velg det nye prosjektet. Trykk på fanen "Live" (stage), gå ti
 for "Protected mode", og trykk "Save Stage". 
 
 Noter prosjektnavn fra input-feltet "Project Path"; dette trengs i neste steg når vi skal kjøre migreringsskriptet.
+
+Vi må også åpne for at *"hvem som helst"* kan lese skjemadefinisjoner og oversettelser, og det gjøres ved å gå til
+"Access" i venstremenyen og legge til "Everyone" på "Read all" under "Project Level Access Permissions". I tillegg
+må vi legge til "Authenticated" på "Create all", "Update all" og "Delete all".
 
 *NB!* Hvis man får en feilmelding ved lagring av Stage så kan det være at man må enable det nye prosjektet på lisensen vår.
 Logg inn som Christian på inn på https://portal.form.io/#/license, og bruk prosjektnavn fra "Settings" i vår
@@ -94,10 +99,12 @@ Installer dependencies, og kjør migreringsskriptet:
     yarn    
     node migrate.js
 
+Legg merke til miljøvariablene som skrives ut når skriptet har fullført migreringen. Disse skal brukes i neste steg.
+
 ## 8. Oppdater secret for byggeren
 
-Helt til sist i skriptet printes en rekke miljøvariabler som skal legges inn i secret `bygger-dev` i
-[Secret Manager](https://console.cloud.google.com).
+Helt til sist i migreringsskriptet printes en rekke miljøvariabler med verdiersom skal legges inn i secret 
+`bygger-dev` i [Secret Manager](https://console.cloud.google.com).
 
 I tillegg må også `FORMIO_JWT_SECRET` legges inn i secret `bygger-dev` med samme verdi som `JWT_SECRET` i secret
 `formio-enterprise-server`.
@@ -105,12 +112,29 @@ I tillegg må også `FORMIO_JWT_SECRET` legges inn i secret `bygger-dev` med sam
     FORMIO_PROJECT_ID=<project-id>
     FORMIO_ROLE_ID_ADMINISTRATOR=<admin-role-id>
     FORMIO_FORM_ID_USER=<user-form-id>
-    FORMIO_PROJECT_URL=https://<formio-api-server-ingress>/<project-name>
-    FORMIO_JWT_SECRET=<samme-verdi-som-i-secret-formio-enterprise-server>
+    FORMIO_PROJECT_URL=https://formio-api-server.ekstern.dev.nav.no/<project-name>
+    FORMIO_JWT_SECRET=<samme-verdi-som-JWT_SECRET-i-secret-formio-enterprise-server>
 
 ## 9. Merge inn endringer i byggeren
 
-https://github.com/navikt/skjemabygging-formio/pulls
+https://github.com/navikt/skjemabygging-formio/pull/521
+
+Dobbeltsjekk at PR i skjemabygging-proxy er merget: https://github.com/navikt/skjemabygging-proxy/pull/11
+(for å tillate at byggeren kaller proxy i prod-gcp på grunn av at byggeren bruker azure tenant `nav.no`,
+ikke `trygdeetaten.no` som er default i dev-gcp).
+
+## 10. Endre prosjekt-url for FyllUt delingslenke
+
+Secret manager: `formio`
+
+    FORMIO_PROJECT_URL=https://formio-api-server.ekstern.dev.nav.no/<project-name>
+
+## 11. Innlogging ved utvikling lokalt
+
+Når vi kjører opp byggeren lokalt logger vi fremdeles på med formio-brukere, ikke Azure AD. 
+De som trenger en slik bruker må logge på portalen (https://formio-api-server.ekstern.dev.nav.no)
+med admin-brukeren, gå inn på prosjektet som ble opprettet, velge "Live"-fanen, gå til "Resources" i venstremenyen,
+trykke på "Use" og registrere sin epost-adresse sammen med et passord.
 
 # Rollback steg-for-steg
 
@@ -137,4 +161,5 @@ For mer informasjon, se https://github.com/navikt/formio/blob/navikt/master/READ
 
 ## 3. Rull tilbake endringer i byggeren
 
-På master i [skjemabygging-formio](https://github.com/navikt/skjemabygging-formio), og i secret `bygger-dev`.
+Git revert merge av PR på master i [skjemabygging-formio](https://github.com/navikt/skjemabygging-formio),
+og endre tilbake secret `bygger-dev`.
