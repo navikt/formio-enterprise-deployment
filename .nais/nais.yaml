@@ -8,6 +8,8 @@ metadata:
   annotations:
     nais.io/run-as-user: "5000"
     nais.io/run-as-group: "5000"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50M"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
 spec:
   image: {{image}}
   port: 3000

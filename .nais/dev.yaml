@@ -1,2 +1,2 @@
 ingresses:
-  - "https://formio-enterprise-server.dev.nav.no"
+  - "https://formio-api-server.ekstern.dev.nav.no"
