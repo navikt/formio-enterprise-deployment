@@ -120,10 +120,6 @@ I tillegg må også `FORMIO_JWT_SECRET` legges inn i secret `bygger-dev` med sam
 
 https://github.com/navikt/skjemabygging-formio/pull/521
 
-Dobbeltsjekk at PR i skjemabygging-proxy er merget: https://github.com/navikt/skjemabygging-proxy/pull/11
-(for å tillate at byggeren kaller proxy i prod-gcp på grunn av at byggeren bruker azure tenant `nav.no`,
-ikke `trygdeetaten.no` som er default i dev-gcp).
-
 ## 10. Endre prosjekt-url for FyllUt delingslenke
 
 Secret manager: `formio`
