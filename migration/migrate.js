@@ -113,6 +113,7 @@ async function main() {
   console.log("");
   console.log(`FORMIO_PROJECT_ID=${project._id}`);
   console.log(`FORMIO_ROLE_ID_ADMINISTRATOR=${administratorRole._id}`);
+  console.log(`FORMIO_ROLE_ID_AUTHENTICATED=${authenticatedRole._id}`);
   console.log(`FORMIO_FORM_ID_USER=${userForm._id}`);
   console.log(`FORMIO_PROJECT_URL=https://formio-api-server.ekstern.dev.nav.no/${projectName}`);
   console.log("");
