@@ -111,6 +111,7 @@ I tillegg må også `FORMIO_JWT_SECRET` legges inn i secret `bygger-dev` med sam
 
     FORMIO_PROJECT_ID=<project-id>
     FORMIO_ROLE_ID_ADMINISTRATOR=<admin-role-id>
+    FORMIO_ROLE_ID_AUTHENTICATED=<auth-role-id>
     FORMIO_FORM_ID_USER=<user-form-id>
     FORMIO_PROJECT_URL=https://formio-api-server.ekstern.dev.nav.no/<project-name>
     FORMIO_JWT_SECRET=<samme-verdi-som-JWT_SECRET-i-secret-formio-enterprise-server>
