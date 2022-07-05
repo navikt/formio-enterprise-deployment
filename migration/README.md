@@ -1,5 +1,7 @@
 # Migrering fra open source til formio enterpriser api server
 
+> :information_source: **Migreringen er gjennomført**. Lar filene i denne mappen ligge som dokumentasjon på det som ble gjort.
+
 # Migrering steg-for-steg
 
 ## 1. Slett applikasjon `formio-api-server` (open source-serveren) i dev-gcp

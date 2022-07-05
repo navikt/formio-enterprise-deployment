@@ -10,7 +10,21 @@ concurrency: deploy-${{ github.ref }}
 jobs:
 
   deploy-to-dev:
-    name: "Deploy Formio enterprise server to dev"
+    name: "Deploy Formio api server to dev"
+    if: startsWith(github.ref, 'refs/heads/dev/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: "actions/checkout@v2"
+      - name: "Deploy to dev-gcp"
+        env:
+          APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
+          CLUSTER: "dev-gcp"
+          RESOURCE: ".nais/nais.yaml"
+          VARS: ".nais/dev0.yaml"
+        uses: "nais/deploy/actions/deploy@v1"
+
+  deploy-to-prod:
+    name: "Deploy Formio api server to prod"
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:

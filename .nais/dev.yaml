@@ -1,2 +1,5 @@
+appName: formio-enterprise-server
 ingresses:
   - "https://formio-api-server.ekstern.dev.nav.no"
+secrets:
+  - formio-enterprise-server
