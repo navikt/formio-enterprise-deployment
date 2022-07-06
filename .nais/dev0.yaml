@@ -1,5 +1,0 @@
-appName: formio-api-server
-ingresses:
-  - "https://formio-api-server.dev.nav.no"
-secrets:
-  - formio-api-server

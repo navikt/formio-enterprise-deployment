@@ -20,7 +20,7 @@ jobs:
           APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
           CLUSTER: "dev-gcp"
           RESOURCE: ".nais/nais.yaml"
-          VARS: ".nais/dev0.yaml"
+          VARS: ".nais/dev.yaml"
         uses: "nais/deploy/actions/deploy@v1"
 
   deploy-to-prod:
@@ -34,5 +34,5 @@ jobs:
           APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
           CLUSTER: "dev-gcp"
           RESOURCE: ".nais/nais.yaml"
-          VARS: ".nais/dev.yaml"
+          VARS: ".nais/prod.yaml"
         uses: "nais/deploy/actions/deploy@v1"
