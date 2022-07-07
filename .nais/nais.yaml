@@ -1,7 +1,7 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: formio-enterprise-server
+  name: {{appName}}
   namespace: skjemadigitalisering
   labels:
     team: skjemadigitalisering
@@ -31,12 +31,13 @@ spec:
     - {{url}}
     {{/each}}
   envFrom:
-    - secret: formio-enterprise-server
+    {{#each secrets as |secret|}}
+    - secret: {{secret}}
+    {{/each}}
   accessPolicy:
     outbound:
       external:
         - host: cluster0.6r72k.mongodb.net
-        - host: cluster0.jvzlj.mongodb.net
           ports:
             - name: mongo
               port: 27017
