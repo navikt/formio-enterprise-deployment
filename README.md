@@ -12,9 +12,11 @@ build our own docker image (see workflow `docker-build.yaml`).
 Common [NAIS](https://doc.nais.io/) configuration for our [Formio](https://www.form.io/) api servers running in gcp.
 
 ### prod.yaml
-This is the configuration for our _production_ deployment.
+This is the configuration for our _production_ deployment. The Formio portal will not be enabled.
 
-It is currently running in `dev-gcp`, but we aspire to move this server to `prod-gcp`.
+### authoring.yaml
+Contains configuration for the api server connected to the production database, but running in `dev-gcp`.
+The Formio portal will be enabled.
 
 ### dev.yaml
 Contains configuration for the api server which is intended for development purposes.

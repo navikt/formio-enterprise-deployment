@@ -1,6 +1,16 @@
 name: Deploy Formio enterprise server
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'To which environment?'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+          - development
+          - authoring
+          - production
 env:
   IMAGE: ghcr.io/${{ github.repository }}/formio-enterprise-nav:7.3.2
 
@@ -10,12 +20,12 @@ concurrency: deploy-${{ github.ref }}
 jobs:
 
   deploy-to-dev:
-    name: "Deploy Formio api server to dev"
-    if: startsWith(github.ref, 'refs/heads/dev/')
+    name: "Deploy Formio dev api server"
+    if: ${{ inputs.environment == 'development' }}
     runs-on: ubuntu-latest
     steps:
       - uses: "actions/checkout@v2"
-      - name: "Deploy to dev-gcp"
+      - name: "Deploy dev instance"
         env:
           APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
           CLUSTER: "dev-gcp"
@@ -23,16 +33,30 @@ jobs:
           VARS: ".nais/dev.yaml"
         uses: "nais/deploy/actions/deploy@v1"
 
-  deploy-to-prod:
-    name: "Deploy Formio api server to prod"
-    if: github.ref == 'refs/heads/main'
+  deploy-to-authoring:
+    name: "Deploy Formio authoring api server"
+    if: ${{ inputs.environment == 'authoring' }}
     runs-on: ubuntu-latest
     steps:
       - uses: "actions/checkout@v2"
-      - name: "Deploy to dev-gcp"
+      - name: "Deploy authoring instance"
         env:
           APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
           CLUSTER: "dev-gcp"
+          RESOURCE: ".nais/nais.yaml"
+          VARS: ".nais/authoring.yaml"
+        uses: "nais/deploy/actions/deploy@v1"
+
+  deploy-to-prod:
+    name: "Deploy Formio production api server"
+    if: ${{ inputs.environment == 'production' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: "actions/checkout@v2"
+      - name: "Deploy prod instance"
+        env:
+          APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
+          CLUSTER: "prod-gcp"
           RESOURCE: ".nais/nais.yaml"
           VARS: ".nais/prod.yaml"
         uses: "nais/deploy/actions/deploy@v1"
