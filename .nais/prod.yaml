@@ -1,5 +1,6 @@
 appName: formio-api
 ingresses:
   - "https://formio-api.intern.nav.no"
+  - "https://formio-api.nav.no"
 secrets:
   - formio-api-server
