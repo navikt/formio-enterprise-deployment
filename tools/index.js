@@ -15,13 +15,11 @@ const env = name => {
 const SOURCE_DB = {
     url: env("FROM_MONGO_CONNECTION_URL"),
     dbName: env("FROM_MONGO_DB_NAME"),
-    projectName: env("FROM_FORMIO_NAVFORMS_PROJECT_NAME"),
 }
 
 const TARGET_DB = {
     url: env("TO_MONGO_CONNECTION_URL"),
     dbName: env("TO_MONGO_DB_NAME"),
-    projectName: env("TO_FORMIO_NAVFORMS_PROJECT_NAME"),
 }
 
 const clientSourceDb = new MongoClient(SOURCE_DB.url);
