@@ -1,4 +1,5 @@
-FROM formio/formio-enterprise:7.3.2
+ARG version
+FROM formio/formio-enterprise:${version}
 
 USER root
 RUN setcap -r $(which node)

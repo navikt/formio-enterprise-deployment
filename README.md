@@ -51,3 +51,13 @@ and then use `mongodump` and `mongorestore` commands:
     mongodump 'mongodb+srv://<prod-user>:<prod-password>@<prod-host>' --readPreference=secondary --archive="backup_db" --db=<dbname>
 
     mongorestore 'mongodb+srv://<dev-user>:<dev-password>@<dev-host>' --archive="backup_db"
+
+# How to upgrade formio-enterprise
+
+See [changelog for formio-enterprise](https://github.com/formio/enterprise-release/blob/master/API-Server-Change-Log.md) for an overview of releases and corresponding formio.js versions
+
+1. Use the GitHub action "Build docker image", and provide the version number that you want to upgrade to as an input
+2. Upgrade formio.js to the corresponding version on all clients (Skjemabygging, fyllut)
+3. Use the GitHub action "Deploy Formio enterprise server" to deploy the image to dev and test that everything works as intended
+4. When deploying to prod we should disable authoring, until prod is up and running (database migration is finished)
+5. Deploy to authoring
