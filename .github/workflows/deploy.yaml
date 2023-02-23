@@ -2,6 +2,10 @@ name: Deploy Formio enterprise server
 on:
   workflow_dispatch:
     inputs:
+      imageName:
+        description: 'Name of the image (e.g. formio-enterprise-nav:x.x.x)'
+        required: true
+        type: string
       environment:
         description: 'To which environment?'
         required: true
@@ -12,7 +16,7 @@ on:
           - authoring
           - production
 env:
-  IMAGE: ghcr.io/${{ github.repository }}/formio-enterprise-nav:7.3.2
+  IMAGE: ghcr.io/${{ github.repository }}/${{ inputs.imageName }}
 
 concurrency: deploy-${{ github.ref }}
 

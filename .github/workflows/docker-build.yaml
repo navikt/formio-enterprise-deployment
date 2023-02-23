@@ -1,8 +1,13 @@
 name: Build docker image
 on:
   workflow_dispatch:
+    inputs:
+      formioEnterpriseVersion:
+        description: 'Version of Formio Enterprise Server to upgrade to'
+        required: true
+        type: string
 env:
-  IMAGE: ghcr.io/${{ github.repository }}/formio-enterprise-nav:7.3.2
+  IMAGE: ghcr.io/${{ github.repository }}/formio-enterprise-nav:${{ inputs.formioEnterpriseVersion }}
 
 
 jobs:
@@ -16,6 +21,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          docker build --tag ${IMAGE} .
+          docker build --build-arg version=${{ inputs.formioEnterpriseVersion }} --tag ${IMAGE} .
           echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${{ github.repository }} --password-stdin
           docker push ${IMAGE}
