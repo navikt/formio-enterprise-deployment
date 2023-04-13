@@ -47,3 +47,4 @@ spec:
             - name: mongo
               port: 27017
               protocol: TCP
+        - host: assets.mongodb-cdn.com
