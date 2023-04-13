@@ -3,13 +3,13 @@ on:
   workflow_dispatch:
     inputs:
       imageVersion:
-        description: 'Version of the image'
+        description: "Version of the image"
         required: true
         type: string
       environment:
-        description: 'To which environment?'
+        description: "To which environment?"
         required: true
-        default: 'development'
+        default: "development"
         type: choice
         options:
           - development
@@ -20,15 +20,16 @@ env:
 
 concurrency: deploy-${{ github.ref }}
 
-
 jobs:
-
   deploy-to-dev:
     name: "Deploy Formio dev api server"
     if: ${{ inputs.environment == 'development' }}
     runs-on: ubuntu-latest
     steps:
       - uses: "actions/checkout@v2"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.17.1"
       - name: "Deploy dev instance"
         env:
           APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
@@ -43,6 +44,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: "actions/checkout@v2"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.17.1"
       - name: "Deploy authoring instance"
         env:
           APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
@@ -57,6 +61,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: "actions/checkout@v2"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.17.1"
       - name: "Deploy prod instance"
         env:
           APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
