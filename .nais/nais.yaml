@@ -42,3 +42,8 @@ spec:
             - name: mongo
               port: 27017
               protocol: TCP
+        - host: clusterdev.6r72k.mongodb.net
+          ports:
+            - name: mongo
+              port: 27017
+              protocol: TCP
