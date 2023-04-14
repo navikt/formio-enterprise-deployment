@@ -1,4 +1,6 @@
 name: Deploy Formio enterprise server
+run-name: Manual deploy of ${{ github.event.inputs.environment }} (${{ github.head_ref || github.ref_name }}) with version ${{ github.event.inputs.imageVersion }}
+
 on:
   workflow_dispatch:
     inputs:
