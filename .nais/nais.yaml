@@ -37,8 +37,11 @@ spec:
   accessPolicy:
     outbound:
       external:
-        - host: cluster0.6r72k.mongodb.net
+        {{#each outboundExternalPorts}}
+        - host: {{this.host}}
           ports:
-            - name: mongo
-              port: 27017
-              protocol: TCP
+              - name: {{this.ports.name}}
+                port: {{this.ports.port}}
+                protocol: {{this.ports.protocol}}
+        {{/each}}
+        - host: license.form.io

@@ -1,15 +1,17 @@
 name: Deploy Formio enterprise server
+run-name: Manual deploy of ${{ github.event.inputs.environment }} (${{ github.head_ref || github.ref_name }}) with version ${{ github.event.inputs.imageVersion }}
+
 on:
   workflow_dispatch:
     inputs:
       imageVersion:
-        description: 'Version of the image'
+        description: "Version of the image"
         required: true
         type: string
       environment:
-        description: 'To which environment?'
+        description: "To which environment?"
         required: true
-        default: 'development'
+        default: "development"
         type: choice
         options:
           - development
@@ -20,9 +22,7 @@ env:
 
 concurrency: deploy-${{ github.ref }}
 
-
 jobs:
-
   deploy-to-dev:
     name: "Deploy Formio dev api server"
     if: ${{ inputs.environment == 'development' }}
