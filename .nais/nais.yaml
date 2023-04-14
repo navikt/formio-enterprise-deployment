@@ -37,11 +37,11 @@ spec:
   accessPolicy:
     outbound:
       external:
-      {{#each outboundExternalPorts as |this|}}
-          - host: "{{this.host}}"
-          - ports:
-              - name: "{{this.ports.name}}"
-                port: "{{this.ports.port}}"
-                protocol: "{{this.ports.protocol}}"
-      {{/each}}
-          - host: license.form.io
+        {{#each outboundExternalPorts}}
+        - host: {{this.host}}
+          ports:
+              - name: {{this.ports.name}}
+                port: {{this.ports.port}}
+                protocol: {{this.ports.protocol}}
+        {{/each}}
+        - host: license.form.io

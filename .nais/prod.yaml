@@ -7,21 +7,21 @@ secrets:
 outboundExternalPorts:
   - host: cluster0.6r72k.mongodb.net
     ports:
-      - name: mongo
+        name: mongo
         port: 27017
         protocol: TCP
   - host: cluster0-shard-00-00.6r72k.mongodb.net
     ports:
-      - name: mongo
+        name: mongo
         port: 27017
         protocol: TCP
   - host: cluster0-shard-00-01.6r72k.mongodb.net
     ports:
-      - name: mongo
+        name: mongo
         port: 27017
         protocol: TCP
   - host: cluster0-shard-00-02.6r72k.mongodb.net
     ports:
-      - name: mongo
+        name: mongo
         port: 27017
         protocol: TCP
