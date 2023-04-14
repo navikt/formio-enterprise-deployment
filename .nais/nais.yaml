@@ -37,48 +37,11 @@ spec:
   accessPolicy:
     outbound:
       external:
-        - host: license.form.io
-        - host: cluster0.6r72k.mongodb.net
-          ports:
-            - name: mongo
-              port: 27017
-              protocol: TCP
-        - host: clusterdev.6r72k.mongodb.net
-          ports:
-            - name: mongo
-              port: 27017
-              protocol: TCP
-
-        # Dev shards
-        - host: clusterdev-shard-00-00.6r72k.mongodb.net
-          ports:
-            - name: mongo
-              port: 27017
-              protocol: TCP
-        - host: clusterdev-shard-00-01.6r72k.mongodb.net
-          ports:
-            - name: mongo
-              port: 27017
-              protocol: TCP
-        - host: clusterdev-shard-00-02.6r72k.mongodb.net
-          ports:
-            - name: mongo
-              port: 27017
-              protocol: TCP
-        
-        # Prod shards
-        - host: clusterdev-shard-00-00.6r72k.mongodb.net
-          ports:
-            - name: mongo
-              port: 27017
-              protocol: TCP
-        - host: clusterdev-shard-00-01.6r72k.mongodb.net
-          ports:
-            - name: mongo
-              port: 27017
-              protocol: TCP
-        - host: clusterdev-shard-00-02.6r72k.mongodb.net
-          ports:
-            - name: mongo
-              port: 27017
-              protocol: TCP
+      {{#each outboundExternalPorts as |this|}}
+          - host: "{{this.host}}"
+          - ports:
+              - name: "{{this.ports.name}}"
+                port: "{{this.ports.port}}"
+                protocol: "{{this.ports.protocol}}"
+      {{/each}}
+          - host: license.form.io
