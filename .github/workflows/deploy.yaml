@@ -28,7 +28,7 @@ jobs:
     if: ${{ inputs.environment == 'development' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: "actions/checkout@v2"
+      - uses: "actions/checkout@v4"
       - name: "Deploy dev instance"
         env:
           APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
@@ -42,7 +42,7 @@ jobs:
     if: ${{ inputs.environment == 'authoring' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: "actions/checkout@v2"
+      - uses: "actions/checkout@v4"
       - name: "Deploy authoring instance"
         env:
           APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
@@ -56,7 +56,7 @@ jobs:
     if: ${{ inputs.environment == 'production' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: "actions/checkout@v2"
+      - uses: "actions/checkout@v4"
       - name: "Deploy prod instance"
         env:
           APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
