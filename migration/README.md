@@ -1,5 +1,7 @@
 # Migrering fra open source til formio enterpriser api server
 
+> :information_source: **Oppgradering av Formio Api Server til v8.x.x**. Se migrate-formio8.js for migrering av data ifm. oppgradering av Formio Api Server.
+
 > :information_source: **Migreringen er gjennomført**. Lar filene i denne mappen ligge som dokumentasjon på det som ble gjort.
 
 # Migrering steg-for-steg
