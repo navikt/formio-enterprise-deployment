@@ -19,6 +19,8 @@ on:
           - production
 env:
   IMAGE: ghcr.io/${{ github.repository }}/formio-enterprise-nav:${{ inputs.imageVersion }}
+permissions:
+  id-token: write
 
 concurrency: deploy-${{ github.ref }}
 
@@ -31,11 +33,10 @@ jobs:
       - uses: "actions/checkout@v4"
       - name: "Deploy dev instance"
         env:
-          APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
           CLUSTER: "dev-gcp"
           RESOURCE: ".nais/nais.yaml"
           VARS: ".nais/dev.yaml"
-        uses: "nais/deploy/actions/deploy@v1"
+        uses: "nais/deploy/actions/deploy@v2"
 
   deploy-to-authoring:
     name: "Deploy Formio authoring api server"
@@ -45,11 +46,10 @@ jobs:
       - uses: "actions/checkout@v4"
       - name: "Deploy authoring instance"
         env:
-          APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
           CLUSTER: "dev-gcp"
           RESOURCE: ".nais/nais.yaml"
           VARS: ".nais/authoring.yaml"
-        uses: "nais/deploy/actions/deploy@v1"
+        uses: "nais/deploy/actions/deploy@v2"
 
   deploy-to-prod:
     name: "Deploy Formio production api server"
@@ -59,8 +59,7 @@ jobs:
       - uses: "actions/checkout@v4"
       - name: "Deploy prod instance"
         env:
-          APIKEY: "${{ secrets.NAIS_DEPLOY_APIKEY }}"
           CLUSTER: "prod-gcp"
           RESOURCE: ".nais/nais.yaml"
           VARS: ".nais/prod.yaml"
-        uses: "nais/deploy/actions/deploy@v1"
+        uses: "nais/deploy/actions/deploy@v2"
