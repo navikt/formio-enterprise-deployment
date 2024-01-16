@@ -1,4 +1,6 @@
-name: Build docker image (${{ github.event.inputs.formioEnterpriseVersion }})
+name: Build docker image
+run-name: Build docker image (${{ github.event.inputs.formioEnterpriseVersion }})
+
 on:
   workflow_dispatch:
     inputs:
