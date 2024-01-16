@@ -6,12 +6,8 @@ on:
         description: 'Version of Formio Enterprise Server to upgrade to'
         required: true
         type: string
-env:
-  IMAGE: ghcr.io/${{ github.repository }}/formio-enterprise-nav:${{ inputs.formioEnterpriseVersion }}
-
 
 jobs:
-
   build:
     name: "Build"
     runs-on: ubuntu-latest
@@ -22,9 +18,12 @@ jobs:
     steps:
       - uses: "actions/checkout@v4"
       - name: "Build and push Docker image"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          docker build --build-arg version=${{ inputs.formioEnterpriseVersion }} --tag ${IMAGE} .
-          echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${{ github.repository }} --password-stdin
-          docker push ${IMAGE}
+        uses: nais/docker-build-push@v0
+        with:
+          team: skjemadigitalisering
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          build_args: |
+            version=${{ inputs.formioEnterpriseVersion }}
+          pull: true
+          tag: ${{ inputs.formioEnterpriseVersion }}
