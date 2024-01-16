@@ -18,7 +18,7 @@ on:
           - authoring
           - production
 env:
-  IMAGE: europe-north1-docker.pkg.dev/nais-management-233d/skjemadigitalisering/formio-enterprise-nav:${{ inputs.imageVersion }}
+  IMAGE: europe-north1-docker.pkg.dev/nais-management-233d/skjemadigitalisering/formio-enterprise-deployment:${{ inputs.imageVersion }}
 permissions:
   id-token: write
 
