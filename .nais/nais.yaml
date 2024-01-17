@@ -40,8 +40,6 @@ spec:
         {{#each outboundExternalPorts}}
         - host: {{this.host}}
           ports:
-              - name: {{this.ports.name}}
-                port: {{this.ports.port}}
-                protocol: {{this.ports.protocol}}
+            - port: {{this.port}}
         {{/each}}
         - host: license.form.io
