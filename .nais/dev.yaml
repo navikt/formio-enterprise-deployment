@@ -1,6 +1,7 @@
 appName: formio-api
 ingresses:
   - "https://formio-api.intern.dev.nav.no"
+  - "https://formio-api.ansatt.dev.nav.no"
 secrets:
   - formio-api-server
 outboundExternalPorts:
