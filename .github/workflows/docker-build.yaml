@@ -1,5 +1,5 @@
 name: Build docker image
-run-name: Build docker image (${{ github.event.inputs.formioEnterpriseVersion }})
+run-name: Build docker image ${{ github.event.inputs.navVersion || github.event.inputs.formioEnterpriseVersion }} (formio ${{ github.event.inputs.formioEnterpriseVersion }})
 
 on:
   workflow_dispatch:
@@ -7,6 +7,10 @@ on:
       formioEnterpriseVersion:
         description: 'Version of Formio Enterprise Server to upgrade to'
         required: true
+        type: string
+      navVersion:
+        description: 'Version of NAV image'
+        required: false
         type: string
 
 jobs:
@@ -28,4 +32,4 @@ jobs:
           build_args: |
             version=${{ inputs.formioEnterpriseVersion }}
           pull: true
-          tag: ${{ inputs.formioEnterpriseVersion }}
+          tag: ${{ github.event.inputs.navVersion || github.event.inputs.formioEnterpriseVersion }}
