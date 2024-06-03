@@ -9,7 +9,7 @@ on:
         required: true
         type: string
       navVersion:
-        description: 'Version of NAV image'
+        description: 'Version of NAV image. Defaults to the Formio version, but if that is already published we can specify some other version here.'
         required: false
         type: string
 
