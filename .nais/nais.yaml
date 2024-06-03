@@ -39,6 +39,11 @@ spec:
     - secret: {{secret}}
     {{/each}}
   accessPolicy:
+    inbound:
+      rules:
+        {{#each inboundApplications}}
+        - application: {{this.application}}
+        {{/each}}
     outbound:
       external:
         {{#each outboundExternalPorts}}

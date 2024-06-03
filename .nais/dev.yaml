@@ -3,6 +3,11 @@ ingresses:
   - "https://formio-api.intern.dev.nav.no"
 secrets:
   - formio-api-server
+inboundApplications:
+  - application: skjemabygging-preprod
+  - application: skjemabygging-preprod-alt
+  - application: skjemautfylling-preprod
+  - application: skjemautfylling-preprod-alt
 outboundExternalPorts:
   - host: clusterdev.6r72k.mongodb.net
     port: 27017

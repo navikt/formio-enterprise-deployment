@@ -4,6 +4,8 @@ ingresses:
   - "https://formio-api.nav.no"
 secrets:
   - formio-api-server
+inboundApplications:
+  - application: skjemabygging
 outboundExternalPorts:
   - host: cluster0.6r72k.mongodb.net
     port: 27017
