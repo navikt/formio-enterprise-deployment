@@ -5,6 +5,8 @@ secrets:
   - formio-enterprise-server
 inboundApplications:
   - application: skjemautfylling-delingslenke
+  - application: skjemabygging-preprod
+  - application: skjemabygging-preprod-alt
 outboundExternalPorts:
   - host: cluster0.6r72k.mongodb.net
     port: 27017
