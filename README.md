@@ -6,6 +6,17 @@ The official formio/formio-enterprise image requires the NET_BIND_SERVICE capabi
 but [NAIS](https://doc.nais.io/) does not allow this, so we have a custom Dockerfile in this repository which is used to
 build our own docker image (see workflow `docker-build.yaml`).
 
+# Use
+Go to [actions](https://github.com/navikt/formio-enterprise-deployment/actions) to create a new Docker image.
+
+When the Docker Image is ready you can deploy it to development, authoring or production.
+
+| Name         | Environment | Database     |
+|--------------|-------------|--------------|
+| development  | dev-gcp     | development  |
+| authoring    | dev-gcp     | production   |
+| production   | prod-gcp    | production   |
+
 # NAIS configuration files inside `.nais` folder
 
 ## nais.yaml
