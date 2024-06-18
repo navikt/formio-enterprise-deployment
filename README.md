@@ -11,11 +11,11 @@ Go to [actions](https://github.com/navikt/formio-enterprise-deployment/actions) 
 
 When the Docker Image is ready you can deploy it to development, authoring or production.
 
-| Name         | Environment | Database     |
-|--------------|-------------|--------------|
-| development  | dev-gcp     | development  |
-| authoring    | dev-gcp     | production   |
-| production   | prod-gcp    | production   |
+| Name         | Environment | Database     | App name                 | Portal |
+|--------------|-------------|--------------|--------------------------|--------|
+| development  | dev-gcp     | development  | formio-api               | Yes    |
+| authoring    | dev-gcp     | production   | formio-enterprise-server | Yes    |
+| production   | prod-gcp    | production   | formio-api               | No     |
 
 # NAIS configuration files inside `.nais` folder
 
