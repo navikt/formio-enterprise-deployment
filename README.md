@@ -1,6 +1,9 @@
 # Formio enterprise deployment
 Deployment of the formio enterprise server to gcp.
 
+> [!NOTE]
+> The formio enterprise server is no longer in use in Nav, and this repository is archived.
+
 ## Docker image
 The official formio/formio-enterprise image requires the NET_BIND_SERVICE capability to be available,
 but [NAIS](https://doc.nais.io/) does not allow this, so we have a custom Dockerfile in this repository which is used to
